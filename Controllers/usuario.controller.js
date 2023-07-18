@@ -11,6 +11,10 @@ const formularioRegistro = (req,res) => {
     })
 }
 
+const registrar = (req,res)=>{
+    
+}
+
 const formularioOlvidePassword = (req,res) => {
     res.render('auth/olvide-password',{
         tituloPagina:'Recuperar contraseña'
@@ -20,6 +24,7 @@ const formularioOlvidePassword = (req,res) => {
 
 
 
+
 export {
-    formularioLogin, formularioRegistro, formularioOlvidePassword
+    formularioLogin, formularioRegistro, formularioOlvidePassword, registrar
 } 
