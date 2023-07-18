@@ -1,18 +1,34 @@
 {
 	"name": "prybienesraices-mvc",
+	"author": "Mario H. Tornería R.",
 	"version": "0.0.1",
 	"private": true,
+	"main": "index.js",
 	"scripts": {
+		"server": "nodemon ./index.js",
+		"start": "node ./index.js",
 		"dev": "vite dev",
 		"build": "vite build",
-		"preview": "vite preview"
+		"preview": "vite preview",
+		"css": "postcss public/css/tailwind.css -o public/css/app.css --watch"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^2.0.0",
 		"@sveltejs/adapter-node": "^1.3.0",
 		"@sveltejs/kit": "^1.20.4",
-		"svelte": "^4.0.0",
+		"autoprefixer": "^10.4.14",
+		"nodemon": "^3.0.1",
+		"postcss": "^8.4.26",
+		"postcss-cli": "^10.1.0",
+		"tailwindcss": "^3.3.3",
 		"vite": "^4.3.6"
 	},
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"express": "^4.18.2",
+		"mysql": "^2.18.1",
+		"mysql2": "^3.5.2",
+		"pug": "^3.0.2",
+		"sequelize": "^6.32.1"
+	}
 }
