@@ -4,7 +4,7 @@ import db from '../config/db.js'
 
 const Usuario = db.define('usuarios',{
     idUsuario:{
-        type: DataTypes.Integer,
+        type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true
     },
@@ -24,7 +24,7 @@ const Usuario = db.define('usuarios',{
         type: DataTypes.STRING
     },
     confirmado:{
-        confirmado:DataTypes.BOOLEAN
+        type:DataTypes.BOOLEAN
     }
 
 })
