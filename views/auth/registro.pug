@@ -6,19 +6,19 @@ block contenido
     if errores
         div(class="max-w-md mx-auto my-10")
             each error in errores
-                p.bg-red-500.text-white.uppercase.text-xs.text-center.p-2.mb-1.font-bold= error.msg
+                p.bg-red-600.text-white.uppercase.text-xs.text-center.p-2.mb-1.font-bold= error.msg
 
     .mt-8.mx-auto.max-w-md
         .bg-white.py-5.px-4.shadow
             form.space-y-3(method="POST" action='/auth/registro' noValidate)
                 div
                     label.block.text-sm.text-gray-600.mb-2.font-bold(for="nombre") Tu Nombre
-                    input#nombre.w-full.px-3.py-2.border.border-gray-300.rounded-xl.placeholder-gray-400(placeholder='Ingresa tu nombre' type='text' name='nombre')
+                    input#nombre.w-full.px-3.py-2.border.border-gray-300.rounded-xl.placeholder-gray-400(placeholder='Ingresa tu nombre' type='text' name='nombre' value=usuario?usuario.nombre:'')
                 div
                     label.block.text-sm.text-gray-600.mb-2.font-bold(for="email") Tu Correo
-                    input#email.w-full.px-3.py-2.border.border-gray-300.rounded-xl.placeholder-gray-400(placeholder='Ingresa tu correo' type='email' name='email')
+                    input#email.w-full.px-3.py-2.border.border-gray-300.rounded-xl.placeholder-gray-400(placeholder='Ingresa tu correo' type='email' name='email' value= usuario ? usuario.email: '')
                 div
-                    label.block.text-sm.text-gray-600.mb-2.font-bold(for="password") Tu Password
+                    label.block.text-sm.text-gray-600.mb-2.font-bold(for="passwd") Tu Password
                     input#password.w-full.px-3.py-2.border.border-gray-300.rounded-xl.placeholder-gray-400(placeholder='Ingresa un password' type='password' name='password')
                 div
                     label.block.text-sm.text-gray-600.mb-2.font-bold(for="repetir_password") repite tu password
@@ -27,7 +27,6 @@ block contenido
                 div.flex.items-center.justify-between
                     a.text-gray-500.text-xs(href="/auth/login") ¿Ya tienes Cuenta? Inicia sesión.
                     a.text-gray-500.text-xs(href="/auth/olvide-password") Olvidé mi password
-
 
                 input(class='w-full bg-indigo-600 py-2 hover:bg-indigo-800 rounded-xl text-white font-bold' type='submit' value='Crear Cuenta')
 
