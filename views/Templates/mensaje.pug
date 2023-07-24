@@ -1,0 +1,9 @@
+extends ../layout/index
+
+block contenido
+    h2.text-center.text-2xl.font-extrabold= tituloPagina
+
+        if mensajes 
+        div(class="max-w-md mx-auto my-10")
+            each mensaje in mensajes
+                p.text-indigo-600.text.xs.text-center.p-2.mb-1.font-bold= mensaje.msg

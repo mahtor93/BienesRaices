@@ -33,6 +33,7 @@ const registrar = async (req,res)=>{
 
         let resultado = validationResult(req);
 
+        //Retorna mensajes si existe algún error
         if(!resultado.isEmpty()){
             return res.render('auth/registro',{
                 tituloPagina:'Crear Cuenta',
@@ -44,23 +45,26 @@ const registrar = async (req,res)=>{
             })
         }
     
-    //Verif. Usuario Duplicado
-    const usuarioDuplicado = await Usuario.findOne({where: { email :req.body.email }})
-    if(usuarioDuplicado){
-        return res.render('auth/registro',{
-            tituloPagina:'Crear Cuenta',
-            errores: [{msg: 'El correo ya está registrado'}],
-            usuario:{
-                nombre:req.body.nombre,
-                email: req.body.email
-            }
-        })
-    }  
-    req.body.token = generarId();
-    await Usuario.create(req.body);
-    res.render('auth/login',{
-        mensajes: [{msg: 'Recuerda verificar tu correo' }]
-    });
+        //Verif. Usuario Duplicado
+        const usuarioDuplicado = await Usuario.findOne({where: { email :req.body.email }})
+        if(usuarioDuplicado){
+            return res.render('auth/registro',{
+                tituloPagina:'Crear Cuenta',
+                errores: [{msg: 'El correo ya está registrado'}],
+                usuario:{
+                    nombre:req.body.nombre,
+                    email: req.body.email
+                }
+            })
+        } 
+
+        // Mensaje de cuenta creada con éxito
+        req.body.token = generarId();
+        await Usuario.create(req.body);
+        res.render('Templates/mensaje',{
+            tituloPagina: 'Cuenta Creada',
+            mensajes: [{msg: 'Enviamos un correo de verificación a: '+req.body.email }]
+        });
 
     }catch(error){
         throw error;
