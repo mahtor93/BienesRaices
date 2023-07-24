@@ -55,12 +55,10 @@ const registrar = async (req,res)=>{
             }
         })
     }  
-    console.log(usuarioDuplicado);
-    return;
-        /*
+    
     const usuario = await Usuario.create(req.body);
     res.json(usuario);
-        */
+    
     }catch(error){
         throw error;
     }
