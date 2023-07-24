@@ -21,19 +21,15 @@ const registrar = async (req,res)=>{
     try{
         console.log(req.body);
         await check('nombre').notEmpty().withMessage('Nombre obligatorio').run(req);
-
         await check('email').notEmpty().withMessage('Email obligatorio').run(req);
         await check('email').isEmail().withMessage('Email invalido').run(req);
-
         await check('password').notEmpty().withMessage('password obligatorio').run(req);
         await check('password').isLength({min:6}).withMessage('El password debe ser de al menos 6 caracteres').run(req);
-        
         if(!ValidarClave(req.body.password,req.body.repetir_password)){
             await check(req.body.repetir_password).equals(req.body.password).withMessage('Los passwords no son iguales').run(req);
         }
 
         let resultado = validationResult(req);
-
         //Retorna mensajes si existe algún error
         if(!resultado.isEmpty()){
             return res.render('auth/registro',{
@@ -45,7 +41,6 @@ const registrar = async (req,res)=>{
                 }
             })
         }
-    
         //Verif. Usuario Duplicado
         const usuarioDuplicado = await Usuario.findOne({where: { email :req.body.email }})
         if(usuarioDuplicado){
@@ -58,18 +53,13 @@ const registrar = async (req,res)=>{
                 }
             })
         } 
-
-
         req.body.token = generarId();
-
         // Mensaje de cuenta creada con éxito
-        
         const usuario = await Usuario.create(req.body);
         res.render('Templates/mensaje',{
             tituloPagina: 'Cuenta Creada',
             mensajes: [{msg: 'Enviamos un correo de verificación a: '+req.body.email }]
         });
-        
         emailRegistro(
             {
                 nombre: usuario.nombre,
@@ -77,12 +67,21 @@ const registrar = async (req,res)=>{
                 token: usuario.token
             }
         )
-
-
     }catch(error){
         throw error;
     }
 
+}
+
+const confirmar = async (req,res, next)=>{
+    const {token} = req.params;
+    next();
+
+    res.render('auth/login',{
+        tituloPagina: 'Iniciar Sesión'
+    })
+
+    console.log("Comprobando... "+token)
 }
 
 const formularioOlvidePassword = (req,res) => {
@@ -92,5 +91,5 @@ const formularioOlvidePassword = (req,res) => {
 }
 
 export {
-    formularioLogin, formularioRegistro, formularioOlvidePassword, registrar
+    formularioLogin, formularioRegistro, formularioOlvidePassword, registrar, confirmar
 } 
