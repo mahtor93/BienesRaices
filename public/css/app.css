@@ -709,3 +709,8 @@ video {
   --tw-bg-opacity: 1;
   background-color: rgb(180 0 0 / var(--tw-bg-opacity));
 }
+
+.text-indigo-600{
+  --tw-bg-opacity: 1;
+  color: rgb(79 70 229 / var(--tw-bg-opacity));
+}

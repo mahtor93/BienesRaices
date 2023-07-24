@@ -58,7 +58,9 @@ const registrar = async (req,res)=>{
     }  
     req.body.token = generarId();
     await Usuario.create(req.body);
-    res.render('auth/login');
+    res.render('auth/login',{
+        mensajes: [{msg: 'Recuerda verificar tu correo' }]
+    });
 
     }catch(error){
         throw error;
