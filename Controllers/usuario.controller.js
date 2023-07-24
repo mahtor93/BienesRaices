@@ -2,6 +2,7 @@ import { check,validationResult } from 'express-validator'
 import Usuario from '../models/Usuario.js'
 import ValidarClave from '../utilities/validaciones.js';
 import {generarId } from '../utilities/tokens.js';
+import {emailRegistro} from '../utilities/emails.js'
 
 const formularioLogin = (req,res) => {
     res.render('auth/login',{
@@ -58,13 +59,25 @@ const registrar = async (req,res)=>{
             })
         } 
 
-        // Mensaje de cuenta creada con éxito
+
         req.body.token = generarId();
-        await Usuario.create(req.body);
+
+        // Mensaje de cuenta creada con éxito
+        
+        const usuario = await Usuario.create(req.body);
         res.render('Templates/mensaje',{
             tituloPagina: 'Cuenta Creada',
             mensajes: [{msg: 'Enviamos un correo de verificación a: '+req.body.email }]
         });
+        
+        emailRegistro(
+            {
+                nombre: usuario.nombre,
+                email: usuario.email,
+                token: usuario.token
+            }
+        )
+
 
     }catch(error){
         throw error;
