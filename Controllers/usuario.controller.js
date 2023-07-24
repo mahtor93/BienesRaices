@@ -1,6 +1,7 @@
 import { check,validationResult } from 'express-validator'
 import Usuario from '../models/Usuario.js'
-import ValidarClave from '../src/utilities/validaciones.js';
+import ValidarClave from '../utilities/validaciones.js';
+import {generarId } from '../utilities/tokens.js';
 
 const formularioLogin = (req,res) => {
     res.render('auth/login',{
@@ -55,17 +56,15 @@ const registrar = async (req,res)=>{
             }
         })
     }  
-    
-    const usuario = await Usuario.create(req.body);
-    res.json(usuario);
-    
+    req.body.token = generarId();
+    await Usuario.create(req.body);
+    res.render('auth/login');
+
     }catch(error){
         throw error;
     }
 
 }
-
-
 
 const formularioOlvidePassword = (req,res) => {
     res.render('auth/olvide-password',{
