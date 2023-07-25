@@ -75,13 +75,13 @@ const registrar = async (req,res)=>{
 
 const confirmar = async (req,res, next)=>{
     const {token} = req.params;
-    next();
+    const usuario = await Usuario.findOne({where:{token}})
 
+    //Verificar si el token es valido
+    //confirmar Cuenta
     res.render('auth/login',{
         tituloPagina: 'Iniciar Sesión'
     })
-
-    console.log("Comprobando... "+token)
 }
 
 const formularioOlvidePassword = (req,res) => {
