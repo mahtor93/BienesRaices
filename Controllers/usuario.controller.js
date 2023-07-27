@@ -161,20 +161,28 @@ const resetPassword = async (req,res) =>{
 }
 
 const comprobarToken = async (req,res, next)=>{
-    const { token } = req.params;
-    const usuario = await Usuario.findOne({where:{token}});
-    console.log(usuario);
-    if(!usuario){
-        return res.render('auth/olvide-password',{
-            tituloPagina:'Recuperar contraseña',
-            mensaje: 'Hubo un error al validar tu información. Intenta de nuevo',
-            error: true,
+    try{
+        const { token } = req.params;
+        const usuario = await Usuario.findOne({where:{token}});
+        console.log(usuario);
 
+        if(!usuario){
+            console.log("no pillado")
+            return res.render('auth/reset-password',{
+                tituloPagina:'Recuperar contraseña',
+                mensajes: [{msg:'Hubo un error al validar tu información. Intenta de nuevo'}],
+                error: true,
+
+            })
+        }
+
+        //Mostrar formulario para añadir password
+        res.render('auth/reset-password',{
+            tituloPagina: 'Reestablece tu password'
         })
+    }catch(error){
+        throw error;
     }
-
-    //Mostrar formulario para añadir password
-    next();
 }
 
 const nuevoPassword = (req,res)=>{
