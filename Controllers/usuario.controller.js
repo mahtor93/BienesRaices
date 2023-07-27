@@ -44,7 +44,16 @@ const autenticarLogin = async (req,res)=>{
             }
         })
     }
-    
+    if(!usuario.verificarPassword(password)){
+        return res.render('auth/login',{
+            tituloPagina:'Iniciar Sesion',
+            csrfToken : req.csrfToken(),
+            errores: [{msg:'Password Incorrecto'}],
+            usuario:{
+                email: req.body.email,
+            }
+        })
+    }
 
 
 
