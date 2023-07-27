@@ -160,7 +160,20 @@ const resetPassword = async (req,res) =>{
     }
 }
 
-const comprobarToken = (req,res, next)=>{
+const comprobarToken = async (req,res, next)=>{
+    const { token } = req.params;
+    const usuario = await Usuario.findOne({where:{token}});
+    console.log(usuario);
+    if(!usuario){
+        return res.render('auth/olvide-password',{
+            tituloPagina:'Recuperar contraseña',
+            mensaje: 'Hubo un error al validar tu información. Intenta de nuevo',
+            error: true,
+
+        })
+    }
+
+    //Mostrar formulario para añadir password
     next();
 }
 
