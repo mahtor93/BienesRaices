@@ -2,7 +2,7 @@ import { check,validationResult } from 'express-validator'
 import Usuario from '../models/Usuario.js'
 import ValidarClave from '../utilities/validaciones.js';
 import {generarId } from '../utilities/tokens.js';
-import {emailRegistro} from '../utilities/emails.js'
+import {emailRegistro,emailRecuperacion} from '../utilities/emails.js'
 
 const formularioLogin = (req,res) => {
     res.render('auth/login',{
@@ -11,7 +11,6 @@ const formularioLogin = (req,res) => {
 
     })
 }
-
 const formularioRegistro = (req,res) => {
 
     res.render('auth/registro',{
@@ -20,10 +19,9 @@ const formularioRegistro = (req,res) => {
 
     })
 }
-
 const registrar = async (req,res)=>{
     try{
-        console.log(req.body);
+
         await check('nombre').notEmpty().withMessage('Nombre obligatorio').run(req);
         await check('email').notEmpty().withMessage('Email obligatorio').run(req);
         await check('email').isEmail().withMessage('Email invalido').run(req);
@@ -68,8 +66,6 @@ const registrar = async (req,res)=>{
             mensajes: [{msg: 'Enviamos un correo de verificación a: '+req.body.email }]
         });
 
-
-
         emailRegistro(
             {
                 nombre: usuario.nombre,
@@ -83,7 +79,6 @@ const registrar = async (req,res)=>{
     }
 
 }
-
 const confirmar = async (req,res, next)=>{
     const {token} = req.params;
     //Verificar si el token es valido
@@ -116,9 +111,64 @@ const formularioOlvidePassword = (req,res) => {
     })
 }
 
+const resetPassword = async (req,res) =>{
+    try{
 
+        await check('email').notEmpty().withMessage('Email obligatorio').run(req);
+        await check('email').isEmail().withMessage('Email invalido').run(req);
+
+        let resultado = validationResult(req);
+        //Retorna mensajes si existe algún error
+        if(!resultado.isEmpty()){
+            return res.render('auth/olvide-password',{
+                tituloPagina:'Recuperar contraseña',
+                csrfToken : req.csrfToken(),
+                errores: resultado.array(),
+            })
+        }
+
+        const { email } = req.body;
+        const usuario = await Usuario.findOne({where:{email}});
+
+        if(!usuario){
+            return res.render('auth/olvide-password',{
+                tituloPagina:'Recuperar contraseña',
+                csrfToken : req.csrfToken(),
+                errores: [{msg:'El email ingresado no está registrado'}],
+                usuario:{
+                    email
+                }
+            })
+        }
+
+        usuario.token = generarId();
+        await usuario.save(); //se guarda el token generado.
+        emailRecuperacion({
+            email: usuario.email,
+            nombre:usuario.nombre,
+            token:usuario.token
+        })
+                // Mensaje de cuenta creada con éxito
+
+        res.render('Templates/mensaje',{
+            tituloPagina: 'Recuperar contraseña',
+            mensajes: [{msg: 'Enviamos un correo de recuperación a: '+req.body.email }]
+        });
+
+    }catch(error){
+        throw error;
+    }
+}
+
+const comprobarToken = (req,res, next)=>{
+    next();
+}
+
+const nuevoPassword = (req,res)=>{
+    
+}
 
 
 export {
-    formularioLogin, formularioRegistro, formularioOlvidePassword, registrar, confirmar
+    formularioLogin, formularioRegistro, formularioOlvidePassword, registrar, confirmar,resetPassword,nuevoPassword,comprobarToken
 } 
