@@ -9,11 +9,22 @@ const formularioLogin = (req,res) => {
     res.render('auth/login',{
         tituloPagina:'Iniciar Sesion',
         csrfToken : req.csrfToken(),
-
     })
 }
+const autenticarLogin = async (req,res)=>{
+    console.log('autenticando');
+    await check('email').notEmpty().withMessage('Email obligatorio').run(req);
+    await check('password').notEmpty().withMessage('password obligatorio').run(req);
+    let resultado = validationResult(req);
+    if(!resultado.isEmpty()){
+        return res.render('auth/login',{
+            tituloPagina:'Iniciar Sesion',
+            csrfToken : req.csrfToken(),
+            errores: resultado.array(),
+        })
+    }
+}
 const formularioRegistro = (req,res) => {
-
     res.render('auth/registro',{
         tituloPagina:'Crear Cuenta',
         csrfToken : req.csrfToken()
@@ -104,14 +115,12 @@ const confirmar = async (req,res, next)=>{
 
 
 }
-
 const formularioOlvidePassword = (req,res) => {
     res.render('auth/olvide-password',{
         tituloPagina:'Recuperar contraseña',
         csrfToken : req.csrfToken(),
     })
 }
-
 const resetPassword = async (req,res) =>{
     try{
 
@@ -160,7 +169,6 @@ const resetPassword = async (req,res) =>{
         throw error;
     }
 }
-
 const comprobarToken = async (req,res, next)=>{
     try{
         const { token } = req.params;
@@ -184,7 +192,6 @@ const comprobarToken = async (req,res, next)=>{
         throw error;
     }
 }
-
 const nuevoPassword = async (req,res)=>{
 
     await check('password').notEmpty().withMessage('password obligatorio').run(req);
@@ -220,5 +227,5 @@ const nuevoPassword = async (req,res)=>{
 
 
 export {
-    formularioLogin, formularioRegistro, formularioOlvidePassword, registrar, confirmar,resetPassword,nuevoPassword,comprobarToken
+    formularioLogin, formularioRegistro, formularioOlvidePassword, registrar, confirmar,resetPassword,nuevoPassword,comprobarToken,autenticarLogin
 } 
