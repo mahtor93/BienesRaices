@@ -12,7 +12,6 @@ const formularioLogin = (req,res) => {
     })
 }
 const autenticarLogin = async (req,res)=>{
-    console.log('autenticando');
     await check('email').notEmpty().withMessage('Email obligatorio').run(req);
     await check('password').notEmpty().withMessage('password obligatorio').run(req);
     let resultado = validationResult(req);
@@ -23,6 +22,32 @@ const autenticarLogin = async (req,res)=>{
             errores: resultado.array(),
         })
     }
+
+    const { email, password} = req.body;
+    const usuario = await Usuario.findOne({where:{email}});
+    
+    if(!usuario){
+        console.log('llegué hasta aquí')
+        return res.render('auth/login',{
+            tituloPagina:'Iniciar Sesion',
+            csrfToken : req.csrfToken(),
+            errores: [{msg:'El usuario no existe'}],
+        })
+    }
+    if(!usuario.confirmado){
+        return res.render('auth/login',{
+            tituloPagina:'Iniciar Sesion',
+            csrfToken : req.csrfToken(),
+            errores: [{msg:'No has confirmado tu cuenta'}],
+            usuario:{
+                email: req.body.email,
+            }
+        })
+    }
+    
+
+
+
 }
 const formularioRegistro = (req,res) => {
     res.render('auth/registro',{
