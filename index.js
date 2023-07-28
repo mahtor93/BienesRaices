@@ -1,8 +1,8 @@
 import  express  from 'express'
-//import csrf from 'csurf'
 import cookieParser from 'cookie-parser'
 import db from './config/db.js'
 import usuarioRoutes from './src/routes/usuarioRoutes.js'
+import propiedadesRoutes from './src/routes/propiedadesRoutes.js'
 import csurf from 'csurf';
 
 const app = express();
@@ -35,3 +35,4 @@ app.use(express.static('public'));
 
 //Routing
 app.use('/auth', usuarioRoutes)
+app.use('/', propiedadesRoutes)

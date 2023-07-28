@@ -10,4 +10,13 @@ html(lang="es")
             h1.text-4xl.my-10.font-extrabold.text-center Bienes
                 span.font-normal Raices
         main(class="mx-auto container px-2")
-            block contenido
+
+        h2.text-center.text-2xl.font-extrabold= tituloPagina
+
+        if errores
+            div(class="max-w-md mx-auto my-10")
+                each error in errores
+                    p.bg-red-600.text-white.uppercase.text-xs.text-center.p-2.mb-1.font-bold.rounded-md= error.msg
+
+
+    block contenido
