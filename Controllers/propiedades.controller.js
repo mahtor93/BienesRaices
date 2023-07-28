@@ -1,6 +1,9 @@
 const admin = (req,res) =>{
-    res.render('/Propiedades/admin')
-}
+    res.render('propiedades/admin',{
+        tituloPagina:'Mis propiedades'
+    })
+
+}   
 
 
 export {
