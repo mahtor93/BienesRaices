@@ -7,7 +7,7 @@ const admin = (req,res) =>{
 
 const crearPropiedad = (req,res) =>{
     res.render('propiedades/crear',{
-        tituloPagina:'Ingresar Propiedad',
+        tituloPagina:'Crear Propiedad',
         barra:true
     })
 }
