@@ -16,15 +16,6 @@ const Propiedad = db.define('propiedades',{
         type:DataTypes.TEXT,
         allowNull:false
     },
-    /*
-    PRP_categoriaPropiedad:{
-        type:DataTypes.INTEGER //FK de la tabla Categorías.
-    },
-    PRP_precio:{
-        type:DataTypes.INTEGER,
-        allowNull:false
-    },
-    */
     PRP_habitaciones:{
         type:DataTypes.INTEGER,
         allowNull:false

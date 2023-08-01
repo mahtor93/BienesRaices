@@ -1,6 +1,6 @@
 import { check, validationResult } from 'express-validator';
 import bcrypt from 'bcrypt';
-import Usuario from '../models/Usuario.js';
+import Usuario from '../models/Usuario.model.js';
 import ValidarClave from '../utilities/validaciones.js';
 import { generarId, makeJWT } from '../utilities/tokens.js';
 import { emailRegistro, emailRecuperacion } from '../utilities/emails.js';

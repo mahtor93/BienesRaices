@@ -1,8 +1,8 @@
 import  express  from 'express'
 import cookieParser from 'cookie-parser'
-import db from './config/db.js'
-import usuarioRoutes from './src/routes/usuarioRoutes.js'
-import propiedadesRoutes from './src/routes/propiedadesRoutes.js'
+import db from './config/db.config.js'
+import usuarioRoutes from './src/routes/usuario.routes.js'
+import propiedadesRoutes from './src/routes/propiedades.routes.js'
 import csurf from 'csurf';
 
 const app = express();
@@ -24,7 +24,7 @@ try{
 //definir puerto
 const port = process.env.PORT || 3333;
 app.listen(port,()=>{
-    console.log('Server running at '+port)
+    console.log('Server corriendo en el puerto: '+port)
 });
 
 //Rutas de archivos de vistas
