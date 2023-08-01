@@ -19,8 +19,12 @@
         const position = marker.getLatLng();
         mapLoc.panTo(new L.LatLng(position.lat,position.lng));
         geocodeService.reverse().latlng(position, 16).run(function(error,resultado){
-            console.log(resultado)
             marker.bindPopup(resultado.address.LongLabel)
+
+            document.querySelector('.calle').textContent = `Dirección: ${resultado?.address?.Address ?? ''}`;
+            document.querySelector('#calle').value = resultado?.address?.Address ?? '';
+            document.querySelector('#lat').value = resultado?.address?.Address ?? '';
+            document.querySelector('#lng').value = resultado?.address?.Address ?? '';
         })
     })
 
