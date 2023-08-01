@@ -13,4 +13,10 @@
         autoPan:true
     }).addTo(mapa)
 
+    marker.on('moveend',function(evt){
+        marker = evt.target
+        const position = marker.getLatLng();
+        mapa.panTo(new L.LatLng(position.lat,posicion.lng))
+    })
+
 })()
