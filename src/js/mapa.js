@@ -2,6 +2,10 @@
     const lat = -36.8269900;
     const lng = -73.0497700;
     const mapa = L.map('mapa').setView([lat, lng ], 16);
+    let marker;
+
+    const geocodeService = L.esri.Geocoding.geocodeService();
+
     
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -16,7 +20,12 @@
     marker.on('moveend',function(evt){
         marker = evt.target
         const position = marker.getLatLng();
-        mapa.panTo(new L.LatLng(position.lat,posicion.lng))
+        mapa.panTo(new L.LatLng(position.lat,posicion.lng));
+        geocodeService.reverse().latlng(posicion, 13).run(function(error,resultado){
+            marker.bindPopup(resultado.addres.LongLabel)
+        })
     })
+
+    
 
 })()
