@@ -11,7 +11,9 @@
 		"preview": "vite preview",
 		"css": "postcss public/css/tailwind.css -o public/css/app.css --watch",
 		"js": "webpack --watch",
-		"dev":"concurrently \"npm run js\" \"npm run css\" \"npm run server\" "
+		"dev":"concurrently \"npm run js\" \"npm run css\" \"npm run server\" ",
+		"db:importar":"node ./seed/seeder.js -i",
+		"db:eliminar":"node ./seed/seeder.js -e"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^2.0.0",

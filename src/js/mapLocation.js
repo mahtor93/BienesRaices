@@ -22,9 +22,9 @@
             marker.bindPopup(resultado.address.LongLabel)
 
             document.querySelector('.calle').textContent = `Dirección: ${resultado?.address?.Address ?? ''}`;
-            document.querySelector('#calle').value = resultado?.address?.Address ?? '';
-            document.querySelector('#lat').value = resultado?.address?.Address ?? '';
-            document.querySelector('#lng').value = resultado?.address?.Address ?? '';
+            document.querySelector('#PRP_direccion').value = resultado?.address?.Address ?? '';
+            document.querySelector('#PRP_latitud').value = resultado?.latlng?.lat ?? '';
+            document.querySelector('#PRP_longitud').value = resultado?.latlng?.lng ?? '';
         })
     })
 
