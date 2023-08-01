@@ -10,13 +10,13 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./src/js/mapa.js":
-/*!************************!*\
-  !*** ./src/js/mapa.js ***!
-  \************************/
+/***/ "./src/js/mapLocation.js":
+/*!*******************************!*\
+  !*** ./src/js/mapLocation.js ***!
+  \*******************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n(function() {\r\n    const lat = -36.8269900;\r\n    const lng = -73.0497700;\r\n    const mapa = L.map('mapa').setView([lat, lng ], 16);\r\n    let marker;\r\n\r\n    const geocodeService = L.esri.Geocoding.geocodeService();\r\n\r\n    \r\n\r\n    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {\r\n        attribution: '&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors'\r\n    }).addTo(mapa);\r\n\r\n    marker = new L.marker([lat,lng],{\r\n        draggable:true,\r\n        autoPan:true\r\n    }).addTo(mapa)\r\n\r\n    marker.on('moveend',function(evt){\r\n        marker = evt.target\r\n        const position = marker.getLatLng();\r\n        mapa.panTo(new L.LatLng(position.lat,posicion.lng));\r\n        geocodeService.reverse().latlng(posicion, 13).run(function(error,resultado){\r\n            marker.bindPopup(resultado.addres.LongLabel)\r\n        })\r\n    })\r\n\r\n    \r\n\r\n})()\n\n//# sourceURL=webpack://prybienesraices-mvc/./src/js/mapa.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n(function() {\r\n    const lat = -36.8269900;\r\n    const lng = -73.0497700;\r\n    const mapLoc = L.map('mapLocation').setView([lat, lng ], 16);\r\n    let marker;\r\n\r\n    const geocodeService = L.esri.Geocoding.geocodeService();\r\n\r\n    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {\r\n        attribution: '&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors'\r\n    }).addTo(mapLoc);\r\n\r\n    marker = new L.marker([lat,lng],{\r\n        draggable:true,\r\n        autoPan:true\r\n    }).addTo(mapLoc)\r\n    marker.on('moveend',function(evt){\r\n        marker = evt.target\r\n        const position = marker.getLatLng();\r\n        mapLoc.panTo(new L.LatLng(position.lat,position.lng));\r\n        geocodeService.reverse().latlng(position, 16).run(function(error,resultado){\r\n            console.log(resultado)\r\n            marker.bindPopup(resultado.address.LongLabel)\r\n        })\r\n    })\r\n\r\n})()\n\n//# sourceURL=webpack://prybienesraices-mvc/./src/js/mapLocation.js?");
 
 /***/ })
 
@@ -43,7 +43,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n(function() {\r\n    const la
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval devtool is used.
 /******/ 	var __webpack_exports__ = {};
-/******/ 	__webpack_modules__["./src/js/mapa.js"](0, __webpack_exports__, __webpack_require__);
+/******/ 	__webpack_modules__["./src/js/mapLocation.js"](0, __webpack_exports__, __webpack_require__);
 /******/ 	
 /******/ })()
 ;
