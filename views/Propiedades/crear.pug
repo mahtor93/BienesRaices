@@ -1,5 +1,8 @@
 extends ../layout/index
 
+block styles
+    link(rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css")
+
 block contenido
 
     div(class='bg-white shadow py-8 px-4 rounded-lg mx-auto max-w-4xl my-10 md:px-10')
@@ -45,7 +48,7 @@ block contenido
                             - let wcs = 1;
                                 while wcs < 5
                                     option(value=wcs) #{wcs++} 
-
+                #mapa.h-96
 
     block scripts
         script(src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js") //integración de openstreets map
