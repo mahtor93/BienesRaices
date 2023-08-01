@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import db from '../config/db.config.js'
 
-const Precios = db.define('precios',{
+const precios = db.define('precios',{
     PRE_idPrecio:{
         type:DataTypes.INTEGER,
         autoIncrement:true,
@@ -13,4 +13,4 @@ const Precios = db.define('precios',{
     }
 })
 
-export default Precios;
+export default precios;

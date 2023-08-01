@@ -12,8 +12,8 @@
 		"css": "postcss public/css/tailwind.css -o public/css/app.css --watch",
 		"js": "webpack --watch",
 		"dev":"concurrently \"npm run js\" \"npm run css\" \"npm run server\" ",
-		"db:importar":"node ./seed/seeder.js -i",
-		"db:eliminar":"node ./seed/seeder.js -e"
+		"db:importar":"node ./seed/seeder.seed.js -i",
+		"db:eliminar":"node ./seed/seeder.seed.js -e"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^2.0.0",
