@@ -1,5 +1,5 @@
-import Precios from '../models/precio.js'
-import Categorias from '../models/categoria.js'
+import Precios from '../models/precio.model.js'
+import Categorias from '../models/categoria.model.js'
 
 const admin = (req,res) =>{
     res.render('propiedades/admin',{
