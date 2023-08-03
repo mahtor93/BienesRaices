@@ -2,7 +2,9 @@ import { exit } from 'node:process'
 import seedCategorias from "./categoria.seed.js";
 import seedPrecios from './precio.seed.js'
 import db from '../config/db.config.js'
-import { categorias, precios } from '../models/index.model.js'
+import { Usuario, Categorias, Precios } from '../models/index.model.js'
+import seedUsuarios from './usuarios.seed.js'
+
 
 const importarDatos = async () => {
     try {
@@ -13,7 +15,11 @@ const importarDatos = async () => {
 
         //Insertar datos
 
-        await Promise.all([categorias.bulkCreate(seedCategorias), precios.bulkCreate(seedPrecios)])
+        await Promise.all([
+            Categorias.bulkCreate(seedCategorias), 
+            Precios.bulkCreate(seedPrecios),
+            Usuario.bulkCreate(seedUsuarios)
+        ])
         console.log('Datos importados Correctamente')
 
         exit(0); //termina proceso correctamente
@@ -28,8 +34,9 @@ const importarDatos = async () => {
 const eliminarDatos = async () => {
     try {
         await Promise.all([
-                categorias.destroy({ where: {}, truncate: true }),
-                precios.destroy({ where: {}, truncate: true })
+                Categorias.destroy({ where: {}, truncate: true }),
+                Precios.destroy({ where: {}, truncate: true }),
+                
             ])
 
         console.log("datos eliminados correctamente");
