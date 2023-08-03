@@ -6,8 +6,8 @@ import protegerRuta from '../../middleware/token.middleware.js';
 const router = expres.Router();
 
 router.get('/mis-propiedades', protegerRuta, admin)
-router.get('/propiedades/crear', crearPropiedad)
-router.post('/propiedades/crear', 
+router.get('/propiedades/crear',protegerRuta, crearPropiedad)
+router.post('/propiedades/crear', protegerRuta,
         body('PRP_tituloAnuncio').notEmpty().withMessage('El titulo del anuncio es obligatorio'),
         body('PRP_Descripcion')
                 .notEmpty().withMessage('La descripción del anuncio es obligatoria')
