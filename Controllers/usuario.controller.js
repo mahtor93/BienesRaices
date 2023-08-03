@@ -63,10 +63,11 @@ const autenticarLogin = async (req, res) => {
     nombre: usuario.nombre,
   });
 
-  res.cookie('UserToken', token, {
+  return res.cookie('UserToken', token, {
     httpOnly: true,
     //secure:true
   }).redirect('/mis-propiedades');
+
 };
 
 const formularioRegistro = (req, res) => {
