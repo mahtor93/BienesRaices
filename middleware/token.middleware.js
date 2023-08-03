@@ -1,11 +1,11 @@
 const protegerRuta = async (req,res,next) =>{
-    try{
-            //verif. token
-    }catch(error){
-        throw error;
-    }finally{
-        next();
-    }
+        //verif. token
+        const { UserToken } = req.cookies;
+        if(!UserToken){
+            return res.redirect('/auth/login');
+        }
+
+    
 }
 
 export default protegerRuta;

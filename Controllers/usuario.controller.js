@@ -66,9 +66,7 @@ const autenticarLogin = async (req, res) => {
   res.cookie('UserToken', token, {
     httpOnly: true,
     //secure:true
-  });
-
-  return res.redirect('/mis-propiedades');
+  }).redirect('/mis-propiedades');
 };
 
 const formularioRegistro = (req, res) => {
