@@ -1,13 +1,13 @@
-import categorias from "./categoria.model.js";
-import precios from "./precio.model.js";
-import propiedad from './propiedad.model.js'
-import usuario from './Usuario.model.js'
+import Categorias from "./categoria.model.js";
+import Precios from "./precio.model.js";
+import Propiedad from './propiedad.model.js'
+import Usuario from './Usuario.model.js'
 
 
 //Este archivo sirve para relacionar las distintas tablas de la base de datos.
 
-propiedad.belongsTo(precios, {foreignKey:'FK_PRE_idPrecio'})
-propiedad.belongsTo(categorias, {foreignKey:'FK_CAT_idCategoria'})
-propiedad.belongsTo(usuario, {foreignKey:'FK_idUsuario'})
+Propiedad.belongsTo(Precios, {foreignKey:'FK_PRE_idPrecio'})
+Propiedad.belongsTo(Categorias, {foreignKey:'FK_CAT_idCategoria'})
+Propiedad.belongsTo(Usuario, {foreignKey:'FK_idUsuario'})
 
-export { categorias, precios,propiedad,usuario }
+export { Categorias, Precios,Propiedad,Usuario }
