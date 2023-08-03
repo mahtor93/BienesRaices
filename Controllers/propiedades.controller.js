@@ -47,11 +47,10 @@ const guardarPropiedad = async(req,res) =>{
     }
     
     const { PRP_tituloAnuncio,PRP_Descripcion,PRP_categoriaPropiedad,PRP_precio,PRP_habitaciones,PRP_estacionamiento,PRP_wc,PRP_direccion,PRP_latitud,PRP_longitud, PRP_imagen = 'Image.png'} = req.body
-    console.log('usuario')
-    console.log(req.usuario.idUsuario)
+
     const { idUsuario:FK_idUsuario } = req.usuario
     try{   
-        const propiedadGuardada = Propiedad.create({
+        const propiedadGuardada = await Propiedad.create({
             FK_idUsuario,
             PRP_tituloAnuncio,
             PRP_Descripcion,
@@ -66,6 +65,11 @@ const guardarPropiedad = async(req,res) =>{
             PRP_longitud,
             PRP_imagen,
         });
+        console.log('propiedad')
+        console.log(propiedadGuardada)
+        const { PRP_idPropiedad } = propiedadGuardada;
+
+        res.redirect(`/propiedades/agregar-imagen/${PRP_idPropiedad}`);
 
     }catch(error){
         console.log(error);
