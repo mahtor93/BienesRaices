@@ -7,7 +7,6 @@ import { Propiedad, Precios,Categorias } from '../models/index.model.js';
 const admin = (req,res) =>{
     res.render('propiedades/admin',{
         tituloPagina:'Mis propiedades',
-        barra:true
     })
 }   
 
@@ -19,7 +18,6 @@ const crearPropiedad = async (req,res) =>{
     res.render('propiedades/crear',{
         tituloPagina:'Crear Propiedad',
         csrfToken: req.csrfToken(),
-        barra:true,
         categorias, 
         precios,
         propiedad:{}
@@ -36,7 +34,6 @@ const guardarPropiedad = async(req,res) =>{
         ])
         return res.render('propiedades/crear',{
             tituloPagina:'Crear Propiedad',
-            barra:true,
             csrfToken: req.csrfToken(),
             categorias, 
             precios,
@@ -65,8 +62,7 @@ const guardarPropiedad = async(req,res) =>{
             PRP_longitud,
             PRP_imagen,
         });
-        console.log('propiedad')
-        console.log(propiedadGuardada)
+
         const { PRP_idPropiedad } = propiedadGuardada;
 
         res.redirect(`/propiedades/agregar-imagen/${PRP_idPropiedad}`);
@@ -77,6 +73,14 @@ const guardarPropiedad = async(req,res) =>{
     
 }
 
+
+const agregarImagen = async(req,res)=>{
+
+    res.render(`propiedades/agregar-imagen`,{
+        
+    })
+}
+
 export {
-    admin, crearPropiedad,guardarPropiedad
+    admin, crearPropiedad,guardarPropiedad,agregarImagen
 }
