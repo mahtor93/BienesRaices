@@ -536,11 +536,11 @@ video {
 .mb-2 {
   margin-bottom: 0.5rem;
 }
-.mt-8 {
-  margin-top: 2rem;
-}
 .mt-5 {
   margin-top: 1.25rem;
+}
+.mt-8 {
+  margin-top: 2rem;
 }
 .block {
   display: block;
@@ -602,6 +602,9 @@ video {
   margin-top: calc(2rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(2rem * var(--tw-space-y-reverse));
 }
+.rounded {
+  border-radius: 0.25rem;
+}
 .rounded-lg {
   border-radius: 0.5rem;
 }
@@ -610,9 +613,6 @@ video {
 }
 .rounded-xl {
   border-radius: 0.75rem;
-}
-.rounded {
-  border-radius: 0.25rem;
 }
 .border {
   border-width: 1px;
@@ -695,9 +695,6 @@ video {
 }
 .pt-3 {
   padding-top: 0.75rem;
-}
-.pb-3 {
-  padding-bottom: 0.75rem;
 }
 .text-center {
   text-align: center;
