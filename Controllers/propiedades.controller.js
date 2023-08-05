@@ -77,7 +77,7 @@ const guardarPropiedad = async(req,res) =>{
 const agregarImagen = async(req,res)=>{
 
     res.render(`propiedades/agregar-imagen`,{
-        
+        tituloPagina:'Agregar Imagen',
     })
 }
 
