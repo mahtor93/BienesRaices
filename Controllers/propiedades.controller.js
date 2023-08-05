@@ -80,6 +80,9 @@ const agregarImagen = async(req,res)=>{
     if(!propiedad){
         return res.redirect('/mis-propiedades');
     }
+    if(propiedad.PRP_publicado==0){
+        return res.redirect('/mis-propiedades')
+    }
     res.render(`propiedades/agregar-imagen`,{
         tituloPagina:'Agregar Imagen',
     })
