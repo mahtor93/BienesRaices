@@ -26,7 +26,7 @@ eval("(function webpackUniversalModuleDefinition(root, factory) {\n\tif(true)\n\
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var dropzone__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! dropzone */ \"./node_modules/dropzone/dist/dropzone.js\");\n\r\n\r\nalert('funkopop')\n\n//# sourceURL=webpack://prybienesraices-mvc/./src/js/agregarImagen.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var dropzone__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! dropzone */ \"./node_modules/dropzone/dist/dropzone.js\");\n\r\n\r\nlet cantidadImagenes = 2;\r\n\r\ndropzone__WEBPACK_IMPORTED_MODULE_0__.Dropzone.options.imagen = {\r\n    dictDefaultMessage: 'Sube tus imagenes aquí',\r\n    acceptedFile:'.png,.jpg,.jpeg',\r\n    maxFilesize:5, //5mb\r\n    maxFiles:cantidadImagenes, \r\n    parallelUploads:cantidadImagenes, //tiene que ser igual a maxFiles;\r\n    autoProcessQueue:false,\r\n    addRemoveLinks:true,\r\n    dictRemoveFile: 'Remover Archivo',\r\n    dictMaxFilesExceeded: `El límite es ${cantidadImagenes} ${cantidadImagenes!=1?'Imagenes':'imagen'}`,\r\n}\n\n//# sourceURL=webpack://prybienesraices-mvc/./src/js/agregarImagen.js?");
 
 /***/ })
 
