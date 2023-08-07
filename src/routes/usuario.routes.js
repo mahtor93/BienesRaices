@@ -1,10 +1,18 @@
 import express from "express";
 import { autenticarLogin,nuevoPassword,comprobarToken, formularioLogin,formularioRegistro,formularioOlvidePassword, registrar,confirmar,resetPassword } from "../../Controllers/usuario.controller.js";    
+import { chatGPT } from "../js/chatGPT.js";
+
+
+
 const router = express.Router();
 
 
 router.get('/login', formularioLogin);
 router.post('/login', autenticarLogin);
+
+router.get('/gpt',chatGPT)
+router.post('/gpt',chatGPT)
+
 
 router.get('/registro', formularioRegistro);
 router.post('/registro', registrar)

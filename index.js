@@ -1,4 +1,5 @@
 import  express  from 'express'
+import { Configuration, OpenAIApi  } from 'openai';
 import cookieParser from 'cookie-parser'
 import db from './config/db.config.js'
 import usuarioRoutes from './src/routes/usuario.routes.js'
@@ -23,6 +24,7 @@ try{
 
 //definir puerto
 const port = process.env.PORT || 3333;
+
 app.listen(port,()=>{
     console.log('Server corriendo en el puerto: '+port)
 });

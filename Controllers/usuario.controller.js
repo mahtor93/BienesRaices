@@ -5,6 +5,9 @@ import ValidarClave from '../utilities/validaciones.js';
 import { generarId, makeJWT } from '../utilities/tokens.js';
 import { emailRegistro, emailRecuperacion } from '../utilities/emails.js';
 
+
+
+
 const formularioLogin = (req, res) => {
   res.render('auth/login', {
     tituloPagina: 'Iniciar Sesion',
