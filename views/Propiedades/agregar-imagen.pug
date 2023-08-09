@@ -2,7 +2,7 @@ extends ../layout/admin
 
 block styles
     link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.css")
-
+    meta(name='csrf-token' content=csrfToken )
 block contenido
 
     div(class='bg-white shadow py-8 px-4 rounded-lg mx-auto max-w-4xl my-10 md:px-10')
