@@ -42,9 +42,7 @@ const guardarPropiedad = async(req,res) =>{
             
         })
     }
-    
-    const { PRP_tituloAnuncio,PRP_Descripcion,PRP_categoriaPropiedad,PRP_precio,PRP_habitaciones,PRP_estacionamiento,PRP_wc,PRP_direccion,PRP_latitud,PRP_longitud, PRP_imagen = 'Image.png'} = req.body
-
+    const { PRP_tituloAnuncio,PRP_Descripcion,PRP_categoriaPropiedad,PRP_precio,PRP_habitaciones,PRP_estacionamiento,PRP_wc,PRP_direccion,PRP_latitud,PRP_longitud, PRP_imagen} = req.body
     const { idUsuario:FK_idUsuario } = req.usuario
     try{   
         const propiedadGuardada = await Propiedad.create({
@@ -62,11 +60,8 @@ const guardarPropiedad = async(req,res) =>{
             PRP_longitud,
             PRP_imagen,
         });
-
         const { PRP_idPropiedad } = propiedadGuardada;
-
         res.redirect(`/propiedades/agregar-imagen/${PRP_idPropiedad}`);
-
     }catch(error){
         console.log(error);
     }
@@ -78,33 +73,45 @@ const agregarImagen = async(req,res)=>{
     console.log(req.params)
     const { id } = req.params;
     const propiedad = await Propiedad.findByPk(id)
-
-
-    
     if(!propiedad){
         return res.redirect('/mis-propiedades');
     }
-
     if(propiedad.PRP_publicado){
         return res.redirect('/mis-propiedades')
     }
-
     if(req.usuario.idUsuario.toString() !== propiedad.FK_idUsuario.toString()){
         return res.redirect('/mis-propiedades');
     }    
-
     res.render(`propiedades/agregar-imagen`,{
         tituloPagina: `Agregar Imagen de ${propiedad.PRP_tituloAnuncio}`,
         csrfToken: req.csrfToken(),
         propiedad
     })
-
 }
 
+const almacenarImagen = async (req,res) =>{
+    const { id } = req.params;
+    const propiedad = await Propiedad.findByPk(id)
+    if(!propiedad){
+        return res.redirect('/mis-propiedades');
+    }
+    if(propiedad.PRP_publicado){
+        return res.redirect('/mis-propiedades')
+    }
+    if(req.usuario.idUsuario.toString() !== propiedad.FK_idUsuario.toString()){ 
+        return res.redirect('/mis-propiedades');
+    }
+    try{
+        console.log(req.file)
+        propiedad.PRP_imagen = req.file.filename
+        propiedad.PRP_publicado = true;
+        await propiedad.save();
 
-
-
+    }catch(error){
+        console.error(error)
+    }   
+}
 
 export {
-    admin, crearPropiedad,guardarPropiedad,agregarImagen
+    admin, crearPropiedad,guardarPropiedad,agregarImagen, almacenarImagen
 }
