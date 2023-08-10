@@ -101,6 +101,10 @@ const agregarImagen = async(req,res)=>{
 
 }
 
+
+
+
+
 export {
     admin, crearPropiedad,guardarPropiedad,agregarImagen
 }

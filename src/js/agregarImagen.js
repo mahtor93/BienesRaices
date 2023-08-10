@@ -15,5 +15,6 @@ Dropzone.options.imagen = {
     dictMaxFilesExceeded: `El límite es ${cantidadImagenes} ${cantidadImagenes!=1?'Imagenes':'imagen'}`,
     headers:{
         'CSRF-Token':token,
-    }
+    },
+    paramName: 'imagen'
 }
