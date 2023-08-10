@@ -42,7 +42,7 @@ const guardarPropiedad = async(req,res) =>{
             
         })
     }
-    const { PRP_tituloAnuncio,PRP_Descripcion,PRP_categoriaPropiedad,PRP_precio,PRP_habitaciones,PRP_estacionamiento,PRP_wc,PRP_direccion,PRP_latitud,PRP_longitud, PRP_imagen} = req.body
+    const { PRP_tituloAnuncio,PRP_Descripcion,PRP_categoriaPropiedad,PRP_precio,PRP_habitaciones,PRP_estacionamiento,PRP_wc,PRP_direccion,PRP_latitud,PRP_longitud, PRP_imagen=''} = req.body
     const { idUsuario:FK_idUsuario } = req.usuario
     try{   
         const propiedadGuardada = await Propiedad.create({
@@ -89,7 +89,7 @@ const agregarImagen = async(req,res)=>{
     })
 }
 
-const almacenarImagen = async (req,res) =>{
+const almacenarImagen = async (req,res, next) =>{
     const { id } = req.params;
     const propiedad = await Propiedad.findByPk(id)
     if(!propiedad){
@@ -102,11 +102,10 @@ const almacenarImagen = async (req,res) =>{
         return res.redirect('/mis-propiedades');
     }
     try{
-        console.log(req.file)
         propiedad.PRP_imagen = req.file.filename
         propiedad.PRP_publicado = true;
         await propiedad.save();
-
+        next();
     }catch(error){
         console.error(error)
     }   

@@ -27,7 +27,7 @@ router.get('/propiedades/agregar-imagen/:id',protegerRuta, agregarImagen)
 router.post('/propiedades/agregar-imagen/:id', 
         protegerRuta,
         upload.single('imagen'),
-        almacenarImagen
+        almacenarImagen,
         )
 
 
