@@ -8,7 +8,11 @@ const admin = async (req,res) =>{
     console.log(req.usuario);
     const propiedades = await Propiedad.findAll({
         where: { FK_idUsuario: idUsuario
-        }
+        },
+        include:[
+            {model: Categorias, as:'categoria'},
+            {model: Precios, as:'precio'}
+        ]
     })
 
     res.render('propiedades/admin',{
