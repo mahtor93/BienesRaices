@@ -3,3 +3,20 @@ extends ../layout/admin
 block contenido
     div.container-sm.px-5
         a(href='/propiedades/crear' class='rounded-xl inline-block w-full sm:w-auto font-bold py-2 px-10 text-white bg-indigo-600 hover:bg-indigo-700 text-sm text-center my-5') Publicar Propiedad
+
+        //pre= JSON.stringify(propiedades, undefined,2)
+
+        if propiedades.length
+            div(class='bg-white shadow rounded-lg')
+                ul(class='divide-y divide-gray-200')
+                    each propiedad in propiedades
+                        li
+                            div(class='p-6 w-full flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-8 gap-4')
+                                div(class='sm:w-1/4 md:w-1/6')
+                                    img(src=`uploads/${propiedad.PRP_imagen}` alt=`Imagen propiedad ${propiedad.PRP_tituloAnuncio}` class='rounded-xl w-full block' )
+                                div(class='sm:w-2/4 md:w-3/6 lg:w-4/6')
+
+                                div(class='sm:w-1/4 md:w-2/6 lg:w-1/6')
+
+        else
+            p.text-center No hay propiedades

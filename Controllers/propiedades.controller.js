@@ -1,12 +1,19 @@
-//import Precios from '../models/precio.model.js'
 import { validationResult } from 'express-validator'
-//import Categorias from '../models/categoria.model.js'
 import { Propiedad, Precios,Categorias } from '../models/index.model.js';
-//import Propiedad from '../models/propiedad.model.js'
 
-const admin = (req,res) =>{
+
+const admin = async (req,res) =>{
+
+    const { idUsuario } = req.usuario
+    console.log(req.usuario);
+    const propiedades = await Propiedad.findAll({
+        where: { FK_idUsuario: idUsuario
+        }
+    })
+
     res.render('propiedades/admin',{
         tituloPagina:'Mis propiedades',
+        propiedades,
     })
 }   
 
