@@ -28,7 +28,7 @@ block contenido
                                     form(action="#")
                                         input(type='submit' class=`px-2 py-2 md:py-1 w-full text-xs leading-5 font-semibold rounded cursor-pointer ${propiedad.PRP_publicado?'bg-green-100 text-green-800':'bg-yellow-100 text-yellow-800'}` value=`${propiedad.PRP_publicado?'Publicado':'No publicado'}`)
 
-                                    a(href='#' class=`px-2 py-2 md:py-1 text-xs leading-5 text-center font-semibold rounded cursor-pointer bg-indigo-100 text-indigo-800`) Editar
+                                    a(href=`/propiedades/editarPropiedad/${propiedad.PRP_idPropiedad}` class=`px-2 py-2 md:py-1 text-xs leading-5 text-center font-semibold rounded cursor-pointer bg-indigo-100 text-indigo-800`) Editar
 
                                     form(action="#")
                                         input(type='submit' class=`px-2 py-2 md:py-1 text-xs w-full leading-5 font-semibold rounded cursor-pointer bg-red-100 text-red-800` value='Eliminar')

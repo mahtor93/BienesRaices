@@ -3,7 +3,6 @@ import { Propiedad, Precios,Categorias } from '../models/index.model.js';
 
 
 const admin = async (req,res) =>{
-
     const { idUsuario } = req.usuario
     console.log(req.usuario);
     const propiedades = await Propiedad.findAll({
@@ -14,7 +13,6 @@ const admin = async (req,res) =>{
             {model: Precios, as:'precio'}
         ]
     })
-
     res.render('propiedades/admin',{
         tituloPagina:'Mis propiedades',
         propiedades,
@@ -79,7 +77,6 @@ const guardarPropiedad = async(req,res) =>{
     
 }
 
-
 const agregarImagen = async(req,res)=>{
     console.log(req.params)
     const { id } = req.params;
@@ -122,6 +119,33 @@ const almacenarImagen = async (req,res, next) =>{
     }   
 }
 
+const editarPropiedad = async(req,res)=>{
+
+    const { id } = req.params; //extraigo la ID de la propiedad desde la URL
+
+    const propiedad = await Propiedad.findByPk(id) //busco la propiedad a editar en la base de datos
+
+    if(!propiedad){ //si no existe la propiedad
+        return res.redirect('/mis-propiedades'); //redirecciono a mis propiedades
+    }
+    if(req.usuario.idUsuario.toString() !== propiedad.FK_idUsuario.toString()){ //si el usuario no es el dueño de la propiedad
+        return res.redirect('/mis-propiedades'); //redirecciono a mis propiedades
+    }
+
+
+    const[categorias,precios] = await Promise.all([
+        Categorias.findAll(),
+        Precios.findAll()
+    ])
+    res.render('propiedades/editarPropiedad',{
+        tituloPagina:'Editor de Propiedades',
+        csrfToken: req.csrfToken(),
+        categorias, 
+        precios,
+        propiedad
+    })
+}
+
 export {
-    admin, crearPropiedad,guardarPropiedad,agregarImagen, almacenarImagen
+    admin, crearPropiedad,guardarPropiedad,agregarImagen, almacenarImagen,editarPropiedad
 }
