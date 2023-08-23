@@ -138,7 +138,7 @@ const editarPropiedad = async(req,res)=>{
         Precios.findAll()
     ])
     res.render('propiedades/editarPropiedad',{
-        tituloPagina:'Editor de Propiedades',
+        tituloPagina:` Editar Propiedad: "${propiedad.PRP_tituloAnuncio}"`,
         csrfToken: req.csrfToken(),
         categorias, 
         precios,
@@ -146,6 +146,60 @@ const editarPropiedad = async(req,res)=>{
     })
 }
 
+const guardarCambios = async(req,res) =>{
+
+    //verificar validacion
+    let resultado = validationResult(req);
+    if(!resultado.isEmpty()){
+        const[categorias,precios] = await Promise.all([
+            Categorias.findAll(),
+            Precios.findAll()
+        ])
+        res.render('propiedades/editarPropiedad',{
+            tituloPagina:` Editar Propiedad ${propiedad.PRP_tituloAnuncio}`,
+            csrfToken: req.csrfToken(),
+            categorias, 
+            precios,
+            errores: resultado.array(),
+            propiedad: req.body
+            
+        })
+    }
+    const { id } = req.params; //extraigo la ID de la propiedad desde la URL
+
+    const propiedad = await Propiedad.findByPk(id) //busco la propiedad a editar en la base de datos
+
+    if(!propiedad){ //si no existe la propiedad
+        return res.redirect('/mis-propiedades'); //redirecciono a mis propiedades
+    }
+    if(req.usuario.idUsuario.toString() !== propiedad.FK_idUsuario.toString()){ //si el usuario no es el dueño de la propiedad
+        return res.redirect('/mis-propiedades'); //redirecciono a mis propiedades
+    }
+
+
+    //escribir y actualizar el registro en la base de datos
+    try{
+        const { PRP_tituloAnuncio,PRP_Descripcion,PRP_categoriaPropiedad,PRP_precio,PRP_habitaciones,PRP_estacionamiento,PRP_wc,PRP_direccion,PRP_latitud,PRP_longitud, PRP_imagen=''} = req.body
+
+        propiedad.set({
+            PRP_tituloAnuncio,
+            PRP_Descripcion,
+            PRP_categoriaPropiedad,
+            PRP_precio,
+            PRP_habitaciones,
+            PRP_estacionamiento,
+            PRP_wc,PRP_direccion,
+            PRP_latitud,
+            PRP_longitud,
+        })
+
+        await propiedad.save();
+        res.redirect('/mis-propiedades');
+    }catch(error){
+        console.log(error);
+    }
+}
+
 export {
-    admin, crearPropiedad,guardarPropiedad,agregarImagen, almacenarImagen,editarPropiedad
+    admin, crearPropiedad,guardarPropiedad,agregarImagen, almacenarImagen,editarPropiedad, guardarCambios
 }
