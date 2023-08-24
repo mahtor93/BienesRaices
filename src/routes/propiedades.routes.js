@@ -1,6 +1,6 @@
 import expres from 'express'
 import { body } from 'express-validator'
-import { admin, crearPropiedad,guardarPropiedad,agregarImagen, almacenarImagen, editarPropiedad, guardarCambios} from '../../Controllers/propiedades.controller.js';
+import { admin, crearPropiedad,guardarPropiedad,agregarImagen, almacenarImagen, editarPropiedad, guardarCambios, eliminarPropiedad} from '../../Controllers/propiedades.controller.js';
 import protegerRuta from '../../middleware/token.middleware.js';
 import upload from '../../middleware/subirImagen.middleware.js';
 
@@ -47,5 +47,8 @@ router.post('/propiedades/editarPropiedad/:id', protegerRuta,
         )
 
 
-router.get('/propiedades/editarPropiedad/:id',protegerRuta, editarPropiedad)
+router.post('/propiedades/eliminarPropiedad/:id',protegerRuta,
+        eliminarPropiedad,
+        )
+
 export default router

@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import { Usuario } from '../models/index.model.js'
 
 const protegerRuta = async (req,res,next) =>{
-        //verif. token
+    //verif. token
     const { UserToken } = req.cookies;
     if(!UserToken){
         console.log('NO TOKEN')
