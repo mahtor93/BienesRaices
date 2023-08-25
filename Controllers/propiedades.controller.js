@@ -223,6 +223,25 @@ const eliminarPropiedad = async(req,res) =>{
     res.redirect('/mis-propiedades');
 }
 
+
+//Area pública
+
+const mostrarPropiedad = async(req,res) =>{
+
+    const { id } = req.params;
+    const propiedad = await Propiedad.findByPk(id);
+    if(!propiedad){
+        //muestra un mensaje de que la propiedad no existe
+        return res.redirect('/');
+    }
+    res.render('propiedades/propiedad',{
+        tituloPagina: `Propiedad: ${propiedad.PRP_tituloAnuncio}`,
+        propiedad,
+    });
+    
+
+}
+
 export {
-    admin, crearPropiedad,guardarPropiedad,agregarImagen, almacenarImagen,editarPropiedad, guardarCambios, eliminarPropiedad 
+    admin, crearPropiedad,guardarPropiedad,agregarImagen, almacenarImagen,editarPropiedad, guardarCambios, eliminarPropiedad, mostrarPropiedad
 }

@@ -1,0 +1,8 @@
+extends ../layout/app
+
+block contenido
+    div(class='bg-white shadow py-8 px-4 rounded-lg mx-auto max-w-4xl my-10 md:px-10')
+        div(class='sm:w-2/1 md:w-2/1 pb-5')
+            img(src=`/uploads/${propiedad.PRP_imagen}` alt=`Imagen propiedad ${propiedad.PRP_tituloAnuncio}` class='rounded-xl w-full block')
+        div(class='sm:w-2/4 md:w-3/6 lg:w-4/6 space-y-3')
+            p(class='text-gray-600')= propiedad.PRP_Descripcion
