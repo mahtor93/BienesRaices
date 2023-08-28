@@ -6,8 +6,3 @@ También cuenta con métodos para enviar correos de verificación de cuenta. Dur
 
 Algunas vistas se pueden encontrar en la carpeta ScreenShots
 
-### 06/08/2023 ### 
-He conectado la API de ChatGPT. 
-
-
-
